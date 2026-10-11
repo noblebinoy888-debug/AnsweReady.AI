@@ -1,0 +1,178 @@
+/* answeReady design tokens. Values come from the PRD build guideline v1. */
+:root {
+  --ink: #0B1F44;
+  --blue: #3B82F6;
+  --blue-hover: #2563EB;
+  --bg: #FFFFFF;
+  --bg-alt: #F7F9FC;
+  --grey: #667085;
+  --border: #EAECF0;
+  --input-border: #D0D5DD;
+  --success: #16A34A;
+  --attention: #D97706;
+  --error: #DC2626;
+  --max: 1240px;
+  --font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0; font-family: var(--font); font-size: 18px; line-height: 1.6;
+  color: var(--ink); background: var(--bg); -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, p, ol, ul { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: 16px; top: 16px; z-index: 10; background: #fff; padding: 8px 12px; border-radius: 8px; }
+
+/* Logo: cropped from the brand sheet (logo.png). Alt text keeps the exact wordmark "answeReady". */
+.logo { display: inline-block; line-height: 0; }
+.logo img { display: block; height: 32px; width: auto; }
+
+/* Header */
+.site-header { border-bottom: 1px solid var(--border); }
+.header { height: 76px; display: flex; align-items: center; justify-content: space-between; }
+.nav { display: flex; align-items: center; gap: 32px; font-size: 15px; font-weight: 500; }
+.nav a { text-decoration: none; color: var(--grey); }
+.nav a:hover { color: var(--ink); }
+.nav .nav-cta { color: #fff; background: var(--blue); padding: 10px 16px; border-radius: 8px; font-weight: 600; }
+.nav .nav-cta:hover { color: #fff; background: var(--blue-hover); }
+
+/* Hero: 55/45 split, left-aligned. The trust line is its own grid item so it can move below the form on mobile. */
+.hero { padding: 72px 0 120px; }
+.hero-grid {
+  display: grid; grid-template-columns: 55fr 45fr; column-gap: 64px; align-items: start;
+  grid-template-areas: "copy form" "trust form"; grid-template-rows: auto 1fr;
+}
+.hero-copy { grid-area: copy; padding-top: 24px; }
+.hero-form { grid-area: form; }
+.trust { grid-area: trust; margin-top: 32px; font-size: 14px; color: var(--grey); letter-spacing: 0.02em; }
+.eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); margin-bottom: 16px; }
+h1 { font-size: 56px; line-height: 1.1; font-weight: 700; letter-spacing: -0.025em; }
+.lead { margin-top: 24px; font-size: 19px; color: var(--grey); max-width: 600px; }
+
+/* Cards */
+.card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 32px; box-shadow: 0 1px 2px rgba(11, 31, 68, 0.04); }
+.card h2 { font-size: 22px; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em; }
+.card .sub { margin-top: 8px; font-size: 15px; color: var(--grey); }
+
+/* Form */
+.field { margin-top: 20px; }
+label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+input, select {
+  width: 100%; height: 50px; padding: 0 14px; font: inherit; font-size: 16px; /* 16px prevents iOS zoom */
+  color: var(--ink); background: #fff; border: 1px solid var(--input-border); border-radius: 8px;
+}
+select {
+  appearance: none; padding-right: 40px; cursor: pointer;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23667085' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 16px center;
+}
+input::placeholder { color: #98A2B3; }
+input:focus, select:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2); }
+[aria-invalid="true"] { border-color: var(--error); }
+[aria-invalid="true"]:focus { box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.15); }
+.error { margin-top: 6px; font-size: 13px; color: var(--error); }
+.error:empty { display: none; }
+.form-error { margin-top: 20px; padding: 12px 14px; font-size: 14px; color: var(--error); background: #FEF3F2; border: 1px solid #FECDCA; border-radius: 8px; }
+.form-error[hidden] { display: none; }
+.hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 54px; padding: 0 24px; border: 0; border-radius: 8px;
+  background: var(--blue); color: #fff; font: inherit; font-size: 16px; font-weight: 600;
+  text-decoration: none; cursor: pointer;
+}
+.btn:hover { background: var(--blue-hover); }
+.btn[disabled] { opacity: 0.7; cursor: progress; }
+.btn-block { width: 100%; margin-top: 28px; }
+.fine { margin-top: 12px; font-size: 13px; color: var(--grey); text-align: center; }
+
+/* Numbered steps (success state) */
+.card h3 { margin-top: 28px; font-size: 15px; font-weight: 600; }
+.steps { list-style: none; padding: 0; margin-top: 16px; display: grid; gap: 14px; counter-reset: step; }
+.steps li { display: flex; align-items: center; gap: 12px; font-size: 15px; }
+.steps li::before {
+  counter-increment: step; content: counter(step); flex: none;
+  width: 28px; height: 28px; display: grid; place-items: center;
+  font-size: 13px; font-weight: 600; background: var(--bg-alt); border: 1px solid var(--border); border-radius: 50%;
+}
+
+/* Content sections */
+.section { padding: 120px 0; }
+.section-alt { background: var(--bg-alt); }
+.section h2 { font-size: 42px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em; max-width: 22ch; }
+.intro { margin-top: 16px; color: var(--grey); max-width: 640px; }
+.grid-4, .grid-3 { display: grid; gap: 32px; margin-top: 56px; }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.plain { list-style: none; padding: 0; } /* no inline styles: CSP style-src is 'self' */
+.item h3 { font-size: 20px; line-height: 1.35; font-weight: 600; }
+.item p { margin-top: 8px; font-size: 16px; color: var(--grey); }
+.num { display: block; margin-bottom: 12px; font-size: 14px; font-weight: 600; color: var(--blue); }
+.note { margin-top: 40px; font-size: 18px; font-weight: 500; }
+
+/* Example: Question → Answer → Evidence → Action */
+.example { margin: 64px 0 0; } /* reset the default <figure> side margins */
+.example-label { font-size: 13px; color: var(--grey); }
+.example .grid-4 { margin-top: 16px; gap: 16px; }
+.example .card { padding: 24px; }
+.step-label { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey); }
+.example blockquote { margin: 12px 0 0; font-size: 16px; line-height: 1.5; }
+.example ul { margin-top: 12px; padding-left: 18px; font-size: 15px; line-height: 1.5; }
+.example li + li { margin-top: 6px; }
+.meta { margin-top: 12px; font-size: 13px; color: var(--grey); }
+
+/* Semantic chips: the colour is carried by the dot (amber/green text on white fails contrast). */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 14px;
+  padding: 4px 10px; font-size: 13px; font-weight: 500; line-height: 1.4;
+  background: #fff; border: 1px solid var(--border); border-radius: 999px;
+}
+.chip::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--dot); }
+.chip-attention { --dot: var(--attention); }
+.chip-error { --dot: var(--error); }
+.chip-success { --dot: var(--success); }
+
+/* Final CTA */
+.cta .btn { margin-top: 32px; }
+
+/* Footer */
+.footer { border-top: 1px solid var(--border); padding: 48px 0 32px; font-size: 14px; color: var(--grey); }
+.footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; }
+.footer .logo img { height: 26px; }
+.tagline { margin-top: 10px; }
+.footer nav { display: flex; gap: 24px; }
+.footer nav a { text-decoration: none; }
+.footer nav a:hover { color: var(--ink); }
+.footer-bottom { margin-top: 32px; }
+
+/* Legal pages */
+.legal { padding: 72px 0 96px; max-width: 720px; }
+.legal h1 { font-size: 40px; }
+.legal h2 { margin-top: 40px; font-size: 22px; font-weight: 600; }
+.legal p, .legal ul { margin-top: 12px; font-size: 17px; }
+.draft { margin-top: 16px; font-size: 14px; color: var(--attention); }
+
+/* Mobile: stack the hero (copy → form → trust), logo-only header, no card chrome around the form. */
+@media (max-width: 900px) {
+  body { font-size: 17px; }
+  .container { padding: 0 20px; }
+  .header { height: 64px; }
+  .nav { display: none; }
+  .hero { padding: 32px 0 72px; }
+  .hero-grid { grid-template-columns: 1fr; grid-template-areas: "copy" "form" "trust"; grid-template-rows: auto; row-gap: 32px; }
+  .hero-copy { padding-top: 0; }
+  .trust { margin-top: 0; }
+  h1 { font-size: 38px; text-wrap: balance; }
+  .lead { margin-top: 16px; font-size: 18px; }
+  .hero .card { border: 0; padding: 0; box-shadow: none; }
+  .section { padding: 72px 0; }
+  .section h2 { font-size: 32px; }
+  .grid-4, .grid-3 { grid-template-columns: 1fr; gap: 32px; margin-top: 40px; }
+  .example .grid-4 { gap: 12px; }
+}

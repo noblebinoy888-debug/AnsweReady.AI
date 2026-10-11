@@ -1,0 +1,35 @@
+name: Deploy to GitHub Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      # Pages caches every file for 10 minutes and landing.css class names are numbered per
+      # build, so a fresh index.html with a cached landing.css renders wrongly. Version the
+      # asset URLs with the commit so the HTML and its CSS/JS always match.
+      - name: Version asset URLs
+        run: |
+          V=${GITHUB_SHA::8}
+          cd public
+          find . -name '*.html' -print0 | xargs -0 sed -i -E "s#(href|src)=\"(landing\.css|landing\.js|js/main\.js|logo\.svg|logo-reversed\.svg|mark-tile\.svg|styles\.css)\"#\1=\"\2?v=$V\"#g"
+          sed -i -E "s#from '\./validate\.js'#from './validate.js?v=$V'#" js/main.js
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - id: deployment
+        uses: actions/deploy-pages@v4
