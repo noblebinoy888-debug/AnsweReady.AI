@@ -1,10 +1,9 @@
 import { validateLead, FIELDS, HOME_COUNTRY } from './validate.js';
 
 // Leads go to the answeReady engine (answeready-engine), which stores them for the admin page.
-// ponytail: the dev server has no HTTPS yet, so plain-http pages use its raw IP:port; drop that branch once api.answeready.ai is live.
+// The site is HTTPS-only (GitHub Pages enforces it), so production always posts to the engine over HTTPS.
 const LOCAL = ['localhost', '127.0.0.1'].includes(location.hostname);
-const FORM_URL = LOCAL ? 'http://localhost:8787/api/leads'
-  : location.protocol === 'http:' ? 'http://27.71.26.165:9100/api/leads' : 'https://api.answeready.ai/api/leads';
+const FORM_URL = LOCAL ? 'http://localhost:8787/api/leads' : 'https://api.answeready.ai/api/leads';
 
 const form = document.getElementById('snapshot-form');
 const success = document.getElementById('snapshot-success');
